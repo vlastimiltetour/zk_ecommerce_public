@@ -1,0 +1,105 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% load i18n %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+   <a href="{% url 'admin:index' %}">{% trans "Domů" %}</a> &rsaquo;
+   <a href="{% url 'admin:orders_order_changelist' %}">{% trans "Objednávky" %}</a> &rsaquo;
+   <a href="{% url 'admin:orders_order_change' order.id %}">{% trans "Objednávka" %} {{ order.id }}</a> &rsaquo; Detail 
+</div>
+{% endblock %}
+{% block content %}
+
+<section class="py-5 bg-light">
+   <div class="container px-4 px-lg-5 mt-5">
+
+      <div class="module">
+         <h1>{% trans "Objednávka" %} {{ order.id}}</h1>
+         <br>
+         
+         <table>
+            <th>
+               <ul class="object-tools">
+               
+                  <a href="#" onclick="window.print();">
+                  {% trans "Tisk" %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16" style="">
+                     <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"></path>
+                     <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"></path>
+                  </svg> 
+                  </a>
+               </ul>
+            </th>
+            <tr>
+               <th>{% trans "Vytvořeno" %}</th>
+               <td>{{ order.created }}</td>
+            </tr>
+            <tr>
+               <th>{% trans "Zákazník" %}</th>
+               <td>{{ order.first_name}} {{ order.last_name }}</td>
+            </tr>
+            <tr>
+               <th>E-mail</th>
+               <td><a href="mailto:{{order.email}}">{{ order.email }}</a></td>
+            </tr>
+            <tr>
+               <th>{% trans "Adresa" %}</th>
+               <td>
+                  {{ order.address }},
+                  {{ order.postal_code }} {{ order.city }}
+               </td>
+            </tr>
+            <tr>
+               <th>{% trans "Celková částka" %}</th>
+               <td>{{ order.get_total_cost }} Kc</td>
+            </tr>
+            <tr>
+               <th>{% trans "Platba" %}</th>
+               <td>{% if order.paid %}  {% trans "Placeno" %} {% else %} {% trans "Čekání na transakci" %} {% endif %}</td>
+            </tr>
+            <tr>
+               <th>{% trans "Stripe Id" %}</th>
+               <td>
+                  {% if order.stripe_id %}
+                  <a href="{{ order.get_stripe_url }}" target="_blank">
+                  {{ order.stripe_id }}
+                  </a>
+                  {% endif %}
+               </td>
+            </tr>
+         </table>
+      </div>
+      <br>
+      <div class="module">
+         <h2 margin-top: 16px>{% trans "Zakoupené položky" %}</h2>
+         <table style="width:100%">
+            <thead>
+               <tr>
+                  <th>{% trans "Produkty" %}</th>
+                  <th>{% trans "Cena" %}</th>
+                  <th>{% trans "Počet" %}</th>
+                  <th>{% trans "Celkem" %}</th>
+               </tr>
+            </thead>
+            <tbody>
+               {% for item in order.items.all %}
+               <tr class="row{% cycle '1' '2' %}">
+               <td>{{ item.product.name }}</td>
+               <td class="num">{{ item.price }}</td>
+               <td class="num">{{ item.quantity }}</td>
+               <td class="num">${{ item.get_cost }}</td>
+               </tr>
+               {% endfor %}
+               <tr class="total">
+                  <td colspan="3">{% trans "Celkem" %}</td>
+                  <td class="num"> {{ order.get_total_cost }}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+      </table>
+   </div>
+</section>
+{% endblock %}

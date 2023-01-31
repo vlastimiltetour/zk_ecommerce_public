@@ -1,0 +1,99 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+
+<!-- Product List-->
+<section class="py-5 bg-light">
+   <div class="container px-4 mt-5 mb-5" style="min-height: 450px">
+   <h2 class="fw-bolder mb-3">{% trans "Nejnovější produkty" %}</h2>
+   <!--Grid-->
+   <div class="row">
+   <!--Menu -->
+    <div class="col-sm-2">
+        <div id="sidebar" class="dropdown-container">
+            <h4>{% trans "Kategorie" %}</h4>
+            <ul>
+              <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url "shop:products" %}">{% trans "Všechno" %}</a>
+              </li>
+              {% for c in categories %}
+                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                  <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+         
+         </div>
+    </div>
+
+    
+   <!--Products All List-->
+   
+   <div class="col-sm-10">
+         <h1>{% if category %}{% else %}  {% endif %}</h1>
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+          {% for product in products %}
+         
+          <div class="col mb-5">
+               <a href="{{ product.get_absolute_url }}">
+              <div class="card h-100">
+                  <!-- Sale badge
+                  <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>-->
+                  <!-- Product image-->
+                  <img class="card-img-top" src="{% if product.image %}{{product.image.url}}{% else %} 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' {% endif %}" alt="..." />
+                  <!-- Product details-->
+                  <div class="card-body p-4">
+                      <div class="text-center">
+                          <!-- Product name-->
+                          <h5 class="fw-bolder">{{ product.name }}</h5>
+                          <!-- Product reviews
+                          <div class="d-flex justify-content-center small text-warning mb-2">
+                              <div class="bi-star-fill"></div>
+                              <div class="bi-star-fill"></div>
+                              <div class="bi-star-fill"></div>
+                              <div class="bi-star-fill"></div>
+                              <div class="bi-star-fill"></div>
+                          </div>-->
+                          <!-- Product price-->
+                          <p class="price">{{ product.price }} Kč</p>
+                      </div>
+                  </div>
+                  <!-- Product actions-->
+                  
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-outline-danger">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                          </svg>
+                          Koupit
+                      </button>
+                        
+                          
+                        
+                         
+                        
+                          
+
+                          
+                        </a>
+                     </div>
+                  </div>
+                  
+                 
+              </div>
+              
+          
+          </div> </a>
+          {% endfor %}
+     
+      </div>
+      
+   
+  </div>
+
+</section>
+{% endblock %}
+
+

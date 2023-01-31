@@ -1,0 +1,210 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<!-- Header -->
+<section class="py-5 bg-light" style="min-height: 92.2vh;">
+   <div class="container px-4 px-lg-5 mt-5" style="height: 100%;">
+      <h2 class="fw-bolder mb-4">{% trans "Nákupní košík" %}</h2>
+      <div class="row">
+         <div class="col-md cart">
+            <div class="col cart">
+               <div class="card p-4 rounded overflow-hidden shadow-lg">
+                  <div class="title">
+                     <div class="row">
+                        {% with total_items=cart|length %}{% if total_items > 0 %}
+                        <div class="col">
+                           <center><h5><b>{% trans "Tvoje kousky" %}</b></h5></center>
+                        </div>
+                     </div>
+                     
+                    
+                      
+                                 <table>
+                                    <thead>
+                                       <tr>
+                                          <th scope="col">{% trans "Položka" %}</th>
+                                          <th scope="col">{% trans "Detail" %}</th>
+                                          
+                                          <th scope="col">{% trans "Počet" %}</th>
+                               
+                                          <th scope="col">{% trans "Celkem" %}</th>
+                                          <th></th>
+                                       </tr>
+                                    </thead>
+                                   
+                                 </div>
+                                    <tbody>
+                                       {% for item in cart %}
+                                       {% with product=item.product %}
+                                       <tr>
+                                       <td class="col-3">
+                                          
+                                          <!--<div class="row border-top">-->
+                                             
+                                       <img class="img-fluid mb-4 mr-4 ml-4 mt-4" src="{% if product.image %}{{product.image.url}}{% else %}{% static 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' %}{% endif %}"></div>
+                                          <!--<a href="{{ product.get_absolute_url }}"></a>-->
+                                          <!-- Name -->
+                                                <!--<a href="{{ product.get_absolute_url }}"></a>-->
+                                       
+                                       </td>
+                                       <td>
+                                       <!-- Name -->
+                                       
+                                       <div class="row text-muted">{{ product.name }} </div>
+                                       <div class="row">{{ product.category }} </div>
+                                       
+                                       </td>
+                                      
+                                       <!-- Price 
+                                       <td>
+                                       <div class="col-md">{{ product.price }} Kč <span class="close"></span></div>
+                                       </td>-->
+                                       <!-- Quantity -->
+                                       
+                                       <td>
+                                       
+                                       <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                       {{ item.update_quantity_form.quantity }}
+                                       {{ item.update_quantity_form.override }}
+                                      <input class="btn btn-outline-dark mt-auto" type="submit" value='{% trans "Upravit" %}'>
+                                       {% csrf_token %}
+                                       </form>
+                                       
+                                       </td>
+
+                                       <td>
+                                          <!-- Items Total Price -->
+                                          <div class="col">{{ item.total_price }} Kč</div>
+                                          <div class="row text-muted">{{ product.eng_price }} </div>
+                                       
+                                          <!-- Remove -->
+                                       </td>
+
+
+                                       <td class="6">
+                                          <div class="col">
+                                             <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                                                <button type="submit" class="btn btn-outline-danger">
+                                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                                                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                                                   </svg>
+                                                 </button>
+                                           {% csrf_token %}
+                                          </form>
+                                          </div>
+                                          </td>
+                                    
+                                       
+                                       </tr>
+                                       {% endwith %}{% endfor %}
+                           
+                           </tbody>
+                           </table>
+               </div>
+            </div>
+            {% with total_items=cart|length %}{% if total_items > 0 %}
+            <div class="row">
+               <div class="row border-top w-lg"></div>
+               <center>
+                  <div class="col py-4">
+                     <h5><b>Celkem: {{ cart.get_total_price }} Kč </b></h5>
+                  </div>
+                  <div><a href="{% url 'orders:order_create' %}"><button class="btn btn-primary btn-lg text-white m-1" style="background-color:  #FF69B4; border-color: white;">Objednat</button></a></div>
+               </center>
+               {% else %}
+            </div>
+         </div>
+         {% endif %}
+         {% endwith %}
+      </div>
+   
+   <!-- end if -->
+            {% else %}
+            <center><span class="text"><b>{% trans "Váš košík je prázdný." %}</b></br>
+               {% trans "Vy to ale můžete změnit. Vyberte si z naší nabídky." %}</span>
+               
+            <br><br>
+            <div><a href="{% url 'shop:products' %}">
+               <button class="btn btn-primary text-white m-1" style="background-color: rgb(236, 74, 137); border-color: white;">Do Obchodu</button></a>
+            
+               {% endif %}
+               {% endwith %}
+            </center>
+            </div>
+         </div>
+      </div>
+      </div> 
+     
+   <!--Summary end-->
+   </div>
+   <div>
+      <!-- Back to shop
+      <p>
+      <center>
+         <a href="{% url 'shop:products' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+               <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+            </svg>
+            <span class="text">{% trans "Zpět do shopu" %}</span>
+         </a>
+      </center>
+      </p>-->
+      
+     
+<!-- Related items section-->
+<section class="py-5 bg-light">
+   <div class="container px-4 px-lg-5 mt-5">
+       {% if recommended_products %}
+       <h2 class="fw-bolder mb-4">{% trans "Další produkty" %}</h2>
+       
+       <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+           
+           {% for p in recom_products %}
+           <div class="col mb-5">
+               <a href="{{ p.get_absolute_url }}">
+               <div class="card h-100">
+                   <!-- Sale badge
+                   <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>-->
+                   <!-- Product image-->
+                   <img class="card-img-top mb-5 mb-md-0" src="{% if p.image %}{{p.image.url}}{% else %} 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' {% endif %}" alt="..." />
+                   <!-- Product details-->
+                   <div class="card-body p-4">
+                       <div class="text-center">
+                           <!-- Product name-->
+                           <h5 class="fw-bolder"> {{ p.name }}</h5>
+                           <!-- Product reviews
+                           <div class="d-flex justify-content-center small text-warning mb-2">
+                               <div class="bi-star-fill"></div>
+                               <div class="bi-star-fill"></div>
+                               <div class="bi-star-fill"></div>
+                               <div class="bi-star-fill"></div>
+                               <div class="bi-star-fill"></div>
+                           </div>-->
+                           <!-- Product price-->
+                           {{ p.price }} Kč
+                       </div>
+                   </div>
+                   <!-- Product actions-->
+                   <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                       <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ p.get_absolute_url }}">{% trans "Detail" %}</a></div>
+                   </div>
+               </div>
+               
+           
+           </div>
+        
+           {% endfor %}
+       </a>
+       </div>
+       {% endif %}
+   </div>
+   </div>
+   </div>
+   </div>
+   </div>
+  
+
+</section>
+{% endblock %}

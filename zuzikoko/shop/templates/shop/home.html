@@ -1,0 +1,140 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!--Header -->
+
+  <!-- Masthead-->
+  <header class="masthead">
+    <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <h1 class="display-5 fw-bolder">{% trans "budete spoko" %}</h1>
+                <h2 class="text-white mx-auto mt-2 mb-5">{% trans "s oblečením od zuzikoko." %}</h2>
+                <a href="#subs"><button class="btn btn-primary text-white m-1" style="background-color: rgb(236, 74, 137); border-color: inherit;">{% trans "Odebírat newsletter" %}</button></a></div>                        
+            </div> 
+        </div> 
+    </div>
+</header>
+
+
+
+
+<!-- Headliner section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            
+            {% for headliner in headline %}
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{% if headliner.image %}{{headliner.image.url}}{% else %}{% static 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' %}{% endif %}"  alt="..." /></div>
+            
+            <div class="col-md-6">
+                <div class="small mb-1">{{ headliner.category }}</div>
+                <h1 class="display-5 fw-bolder">{{ headliner.name }}</h1>
+                <div class="fs-5 mb-2">
+                    <!-- cross out 
+                    <span class="text-decoration-line-through">$45.00</span>-->
+                    <p class="price"><b>{{ headliner.price }} Kč</b></p>
+                </div>
+                <p class="lead">{{ headliner.description }}</p>
+                <div class="d-flex">
+                    <form action="{% url 'cart:cart_add' headliner.id %}" method="post">
+                        {{ cart_product_form }}
+                        {% csrf_token %}
+                    <!--<input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
+                            <button type="submit" class="btn btn-outline-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                    </svg>
+                                    {% trans "Koupit" %}
+                                </button>
+                    </form>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+
+
+<!-- Recommended items section-->
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4">{% trans "Další podobné produkty" %}</h2>
+        
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in products %}
+            <a href="{{ product.get_absolute_url }}">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge
+                    <div class="badge text-white position-absolute" style="top: 0.5rem; right: 0.5rem;">Sale</div>-->
+                    <!-- Product image-->
+                    
+                        <img class="card-img-top" src="{% if product.image %}{{product.image.url}}{% else %}{% static 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' %}{% endif %}" alt="...">
+                    
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                             <!-- Product reviews
+                             <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>-->
+                            <!-- Product price-->
+                            <p class="price">{{ product.price }} Kč </p>
+                        </div>
+                    </div>
+                    <!-- Product actions
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                    </div>-->
+                </div>
+            </div>
+            
+            
+            
+        {% endfor %}
+    </a>
+        </div>
+    </div>
+</section>
+
+<section class="newsletter" id="subs">
+    <div class="container px-5 px-lg-5">
+            <center><h2 style="color:white;"> {% trans "Ať vám nic neuteče!" %} </h2></center>
+            <form class="uniForm" action ="{% url 'newsletter:subscribe' %}" method="POST" href="#subs">
+                {{ my_formset|crispy }}
+                {{ form.as_p }}
+            <div class="input-group">
+                    <input id="email" name="email" type="email" class="form-control" placeholder="Enter your e-mail">
+                        <span class="input-group-btn">
+                            
+                            <button type="submit" action="#subs" class="btn text-white" style="background-color: rgb(236, 74, 137)">{% trans "Odebírat" %}</button>                                     
+                        </span></br>
+            </div>  
+            {% csrf_token %} 
+                <br>
+                {% for message in messages %}
+                <div class="alert alert-success">
+                {{ message }}
+                </div>
+                {% endfor %} 
+        </form>  
+    </div>
+</section>
+
+
+
+{% endblock %}

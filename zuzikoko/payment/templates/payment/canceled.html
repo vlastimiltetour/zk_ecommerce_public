@@ -1,0 +1,17 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <center>
+            <h1>{% trans "Vaše platba nebyla zpracována." %} </h1>
+            <p> {% trans "Při zpracování se objevil problém." %} </p>
+            <br>
+            <div><a href="{% url 'shop:products' %}"><button class="btn btn-primary btn-lg text-white m-1" style="background-color:  #FF69B4; border-color: white;">Zpět do obchodu</button></a></div></center>
+        
+       
+       
+    </div>
+</section>
+{% endblock %}

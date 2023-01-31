@@ -1,0 +1,82 @@
+services:
+  db:
+    image: postgres:14.5
+    restart: always
+    ports:
+    - "5433:5433"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - DJANGO_SETTINGS_MODULE=web.settings.prod
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis:7.0.4
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+  rabbitmq:
+    image: rabbitmq:3.7-management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - DJANGO_SETTINGS_MODULE=web.settings.prod
+      - RABBITMQ_DEFAULT_USER=myuser
+      - RABBITMQ_DEFAULT_PASS=mypassword
+    volumes:
+      - .:/code/zk/zuzikoko
+    depends_on:
+      - db
+  celery:
+    build: .
+    command: "celery --workdir=./zuzikoko --app=web --broker=amqp://myuser:mypassword@rabbitmq:5672 --result-backend=rpc:// worker --loglevel=INFO"
+    volumes:
+      - .:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=web.settings.prod
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - CELERY_BROKER_URL = 'amqp://myuser:mypassword@rabbitmq:5672'
+      - CELERY_RESULT_BACKEND = 'rpc://'
+    links:
+      - rabbitmq
+    depends_on:
+      - web
+  web:
+    build: .
+    command: ["./wait-for-it.sh", "db:5432", "--","uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]    
+    restart: always
+    volumes:
+      - .:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=web.settings.prod
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - CELERY_BROKER_URL = 'amqp://myuser:mypassword@rabbitmq:5672'
+      - CELERY_RESULT_BACKEND = 'rpc://'
+    depends_on:
+      - db
+      - rabbitmq
+  flower:
+    image: mher/flower:0.9.7
+    command: ['flower', '--amqp://myuser:mypassword@rabbitmq:5672', '--port=5555']
+    ports:
+      - 5555:5555
+    depends_on:
+      - web
+  nginx:
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+    ports:
+      - "80:80"
+      - "443:443"

@@ -1,0 +1,427 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-29 00:24+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cart/forms.py:9 cart/templates/cart/detail.html:29
+#: orders/templates/admin/orders/order/detail.html:82
+msgid "Počet"
+msgstr "Count"
+
+#: cart/templates/cart/checkout.html:8 cart/templates/cart/detail.html:8
+msgid "Nákupní košík"
+msgstr "Shopping Cart"
+
+#: cart/templates/cart/checkout.html:21
+msgid "Zpět do Shopu"
+msgstr "Back to Shop"
+
+#: cart/templates/cart/detail.html:17
+msgid "Tvoje kousky"
+msgstr "Your Items"
+
+#: cart/templates/cart/detail.html:26
+msgid "Položka"
+msgstr "Item"
+
+#: cart/templates/cart/detail.html:27
+#: shop/templates/shop/product/detail.html:113
+msgid "Detail"
+msgstr "Detail"
+
+#: cart/templates/cart/detail.html:31
+#: orders/templates/admin/orders/order/detail.html:83
+#: orders/templates/admin/orders/order/detail.html:96
+#: orders/templates/orders/order/create.html:27
+#: orders/templates/orders/order/pdf.html:49
+msgid "Celkem"
+msgstr "Total"
+
+#: cart/templates/cart/detail.html:71
+msgid "Upravit"
+msgstr "Update"
+
+#: cart/templates/cart/detail.html:126
+msgid "Váš košík je prázdný."
+msgstr "Your shopping cart is empty."
+
+#: cart/templates/cart/detail.html:127
+msgid "Vy to ale můžete změnit. Vyberte si z naší nabídky."
+msgstr "But you can change it. Choose from our products."
+
+#: cart/templates/cart/detail.html:151
+msgid "Zpět do shopu"
+msgstr "Back to Shop"
+
+#: cart/templates/cart/detail.html:160
+msgid "People who bought this also bought"
+msgstr "People who bought this also bought"
+
+#: orders/models.py:10
+msgid "first name"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:8
+#: shop/templates/shop/base.html:32
+msgid "Domů"
+msgstr "Home"
+
+#: orders/templates/admin/orders/order/detail.html:9
+#, fuzzy
+#| msgid "Shrnutí objednávky"
+msgid "Objednávky"
+msgstr "Order Summary"
+
+#: orders/templates/admin/orders/order/detail.html:10
+#: orders/templates/admin/orders/order/detail.html:19
+#, fuzzy
+#| msgid "Objednat"
+msgid "Objednávka"
+msgstr "Order"
+
+#: orders/templates/admin/orders/order/detail.html:27
+msgid "Tisk"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:36
+msgid "Vytvořeno"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:40
+msgid "Zákazník"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:48
+#: orders/templates/orders/order/create.html:73
+#: orders/templates/orders/order/pdf.html:22
+msgid "Adresa"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:55
+msgid "Celková částka"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:59
+msgid "Platba"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:60
+#: orders/templates/orders/order/pdf.html:59
+msgid "Placeno"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:60
+msgid "Čekání na transakci"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:63
+msgid "Stripe Id"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:76
+#: orders/templates/orders/order/pdf.html:29
+msgid "Zakoupené položky"
+msgstr ""
+
+#: orders/templates/admin/orders/order/detail.html:80
+#, fuzzy
+#| msgid "Product"
+msgid "Produkty"
+msgstr "Product"
+
+#: orders/templates/admin/orders/order/detail.html:81
+#: orders/templates/orders/order/pdf.html:34
+msgid "Cena"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:8
+#: payment/templates/payment/process.html:7
+msgid "Shrnutí objednávky"
+msgstr "Order Summary"
+
+#: orders/templates/orders/order/create.html:9
+msgid ""
+"Doplňte a zkontrolujte si prosím údaje níže. Zuzikoko pečlivě zabalí a pošle "
+"objednané zboží na Vámi požadovanou adresu."
+msgstr ""
+
+#: orders/templates/orders/order/create.html:14
+#, fuzzy
+#| msgid "Košík"
+msgid "Tvůj košík"
+msgstr "Cart"
+
+#: orders/templates/orders/order/create.html:22
+#: orders/templates/orders/order/create.html:28
+msgid "Kč"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:25
+msgid "Promo code"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:36
+msgid "Osobní údaje"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:45
+msgid "Jméno"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:51
+msgid "Příjmení"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:60
+msgid "Emailová adresa"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:62
+msgid "Vaši adresu nikde sdílet nebudeme."
+msgstr ""
+
+#: orders/templates/orders/order/create.html:79
+msgid "Město"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:85
+msgid "PSČ"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:91
+msgid "Způsob doručení"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:97
+msgid "Balík"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:101
+msgid "Osobní vyzvednutí"
+msgstr ""
+
+#: orders/templates/orders/order/create.html:112
+msgid "Pokračujte v nákupu"
+msgstr ""
+
+#: orders/templates/orders/order/created.html:9
+msgid "Děkuji"
+msgstr ""
+
+#: orders/templates/orders/order/created.html:10
+msgid "Vaše objednávka byla úspěšně zpracována. Vaše objednávka má číslo "
+msgstr ""
+
+#: orders/templates/orders/order/pdf.html:12
+msgid "Zuzikoko děkuje!"
+msgstr ""
+
+#: orders/templates/orders/order/pdf.html:17
+msgid "Učet číslo"
+msgstr ""
+
+#: orders/templates/orders/order/pdf.html:33
+#, fuzzy
+#| msgid "Product"
+msgid "Produkt"
+msgstr "Product"
+
+#: orders/templates/orders/order/pdf.html:35
+#, fuzzy
+#| msgid "Quantity"
+msgid "Kvantita"
+msgstr "Quantity"
+
+#: orders/templates/orders/order/pdf.html:36
+msgid "Částka"
+msgstr ""
+
+#: orders/templates/orders/order/pdf.html:58
+msgid "Stav platby: "
+msgstr ""
+
+#: orders/templates/orders/order/pdf.html:59
+msgid "Nezaplaceno"
+msgstr ""
+
+#: payment/templates/payment/canceled.html:8
+msgid "Vaše platba nebyla zpracována."
+msgstr "Your payment wasn't processed."
+
+#: payment/templates/payment/canceled.html:9
+msgid "Při zpracování se objevil problém."
+msgstr "There was a problem in processing your payment."
+
+#: payment/templates/payment/completed.html:10
+msgid "Vaše platba byla úspěšná."
+msgstr "Your payment was successful."
+
+#: payment/templates/payment/completed.html:11
+msgid "Platba proběhla bez problémů."
+msgstr "Your payment wen't throught without any issues."
+
+#: payment/templates/payment/process.html:12
+msgid "Product"
+msgstr "Product"
+
+#: payment/templates/payment/process.html:13
+msgid "Price"
+msgstr "Price"
+
+#: payment/templates/payment/process.html:14
+msgid "Quantity"
+msgstr "Quantity"
+
+#: payment/templates/payment/process.html:15
+#: payment/templates/payment/process.html:31
+msgid "Total"
+msgstr ""
+
+#: payment/templates/payment/process.html:40
+msgid "Objednat"
+msgstr "Order"
+
+#: payment/urls.py:8
+msgid "process/"
+msgstr ""
+
+#: payment/urls.py:9
+msgid "completed/"
+msgstr ""
+
+#: payment/urls.py:10
+msgid "canceled/"
+msgstr ""
+
+#: shop/templates/shop/about.html:12
+msgid "O mně"
+msgstr "About"
+
+#: shop/templates/shop/about.html:13
+msgid ""
+"Ahoj ja jsem zuzi koko a piju vino. In publishing and graphic design, Lorem "
+"ipsum is a placeholder text commonly used to demonstrate the visual form of "
+"a document or a typeface without relying on meaningful content. Lorem ipsum "
+"may be used as a placeholder before final copy is available. Wikipedia"
+msgstr "Hi, my name is Zuzi."
+
+#: shop/templates/shop/about.html:14
+msgid "Kontakt"
+msgstr "Contact"
+
+#: shop/templates/shop/base.html:33
+msgid "O mně"
+msgstr "About"
+
+#: shop/templates/shop/base.html:34
+msgid "Shopuj"
+msgstr "Shop"
+
+#: shop/templates/shop/base.html:92
+msgid "Košík"
+msgstr "Cart"
+
+#: shop/templates/shop/home.html:14
+msgid "budete spoko"
+msgstr "you will be happy"
+
+#: shop/templates/shop/home.html:15
+msgid "s oblečením od zuzikoko."
+msgstr "with clothes from zuzi"
+
+#: shop/templates/shop/home.html:16
+msgid "Odebírat newsletter"
+msgstr "Subscribe to the newsletter"
+
+#: shop/templates/shop/home.html:52 shop/templates/shop/product/detail.html:48
+msgid "Koupit"
+msgstr "Buy"
+
+#: shop/templates/shop/home.html:69
+msgid "Další podobné produkty"
+msgstr "Related products"
+
+#: shop/templates/shop/home.html:116
+msgid "Ať vám nic neuteče!"
+msgstr "Don't miss any news"
+
+#: shop/templates/shop/home.html:124
+msgid "Odebírat"
+msgstr "Subscribe"
+
+#: shop/templates/shop/product/detail.html:80
+msgid "Další produkty"
+msgstr "Related products"
+
+#: shop/templates/shop/product/list.html:9
+msgid "Nejnovější produkty"
+msgstr "Newest products"
+
+#: shop/templates/shop/product/list.html:15
+msgid "Kategorie"
+msgstr "Categories"
+
+#: shop/templates/shop/product/list.html:18
+msgid "Všechno"
+msgstr "All"
+
+#: web/settings/base.py:186 web/settings/base.py:192 web/settings_prod.py:222
+#: web/settings_prod.py:228
+msgid "Česky"
+msgstr ""
+
+#: web/settings/base.py:187 web/settings/base.py:193 web/settings_prod.py:223
+#: web/settings_prod.py:229
+msgid "English"
+msgstr ""
+
+#: web/urls.py:26
+msgid "cart/"
+msgstr ""
+
+#: web/urls.py:27
+msgid "orders/"
+msgstr ""
+
+#: web/urls.py:28
+msgid "payment/"
+msgstr ""
+
+#: web/urls.py:29
+msgid "newsletter/"
+msgstr ""
+
+#~ msgid "Podobné produkty"
+#~ msgstr "Related products"
+
+#~ msgid "Vaše platba proběhla úspěšně."
+#~ msgstr "Your payment was successful."
+
+#~ msgid "Image"
+#~ msgstr "Image"
+
+#~ msgid "Odebrat"
+#~ msgstr "Remove"
+
+#, fuzzy
+#~| msgid "Počet"
+#~ msgid "počet"
+#~ msgstr "Count"
+
+#~ msgid "Order Summary"
+#~ msgstr "Order Summary"
